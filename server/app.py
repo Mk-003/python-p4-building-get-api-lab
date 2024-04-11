@@ -52,6 +52,16 @@ def bakeries_by_id():
 
     return response
 
+@app.route('/baked_goods/by_price')
+def baked_goods_by_price():
+    baked_goods=BakedGood.query.order_by(BakedGood.price.desc()).all()
+    baked_goods_list = [baked_good.to_dict() for baked_good in baked_goods]
+
+    # Return the list of baked goods as JSON
+    return jsonify(baked_goods_list)
+    
+    
+
 
 
 
@@ -61,13 +71,15 @@ def bakeries_by_id():
 # def bakery_by_id(id):
 #     return ''
 
-@app.route('/baked_goods/by_price')
-def baked_goods_by_price():
-    return ''
 
 @app.route('/baked_goods/most_expensive')
 def most_expensive_baked_good():
-    return ''
+    most_expensive_baked_good = BakedGood.query.order_by(BakedGood.price.desc()).first()
+
+    baked_good_dict = most_expensive_baked_good.to_dict()
+
+
+    return jsonify(baked_good_dict)
 
 if __name__ == '__main__':
-    app.run(port=5550, debug=True)
+    app.run(port=5505, debug=True)
