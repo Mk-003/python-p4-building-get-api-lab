@@ -20,7 +20,41 @@ def index():
 
 @app.route('/bakeries')
 def bakeries():
-    return ''
+    bakeries=[]
+    bakeries_query = Bakery.query.all()
+    if not bakeries_query:
+        return 'No bakeries found', 404
+    for bakery in Bakery.query:
+        bakery_dict=bakery.to_dict()
+        if not bakery_dict:
+           return 'Error converting bakery to dict', 500
+        bakeries.append(bakery_dict)
+
+    response=make_response(
+        bakeries,
+        200,
+        {"Content-Type": "application/json"}
+    )    
+
+    return response
+
+@app.route('/bakeries/<int:id>')
+def bakeries_by_id():
+    bakery=Bakery.query.filter(Bakery.id==id).first()
+    
+    backery_dict=bakery.to_dict()
+    response=make_response(
+            backery_dict,
+            200,
+            
+
+        )
+
+    return response
+
+
+
+
 
 @app.route('/bakeries/<int:id>')
 def bakery_by_id(id):
@@ -35,4 +69,4 @@ def most_expensive_baked_good():
     return ''
 
 if __name__ == '__main__':
-    app.run(port=5555, debug=True)
+    app.run(port=5550, debug=True)

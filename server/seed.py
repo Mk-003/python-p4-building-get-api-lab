@@ -23,3 +23,4 @@ with app.app_context():
 
     db.session.add_all(baked_goods)
     db.session.commit()
+print('<;>')
