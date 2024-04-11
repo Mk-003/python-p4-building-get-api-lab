@@ -56,9 +56,10 @@ def bakeries_by_id():
 
 
 
-@app.route('/bakeries/<int:id>')
-def bakery_by_id(id):
-    return ''
+
+# @app.route('/bakeries/<int:id>')
+# def bakery_by_id(id):
+#     return ''
 
 @app.route('/baked_goods/by_price')
 def baked_goods_by_price():
