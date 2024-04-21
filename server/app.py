@@ -42,13 +42,17 @@ def bakeries():
 def bakeries_by_id():
     bakery=Bakery.query.filter(Bakery.id==id).first()
     
-    backery_dict=bakery.to_dict()
-    response=make_response(
+    if bakery:
+    
+         backery_dict=bakery.to_dict()
+         response=make_response(
             backery_dict,
             200,
+            {"Content-Type": "application/json"}
             
-
         )
+    else:
+        response = make_response("Bakery not found", 404)
 
     return response
 
